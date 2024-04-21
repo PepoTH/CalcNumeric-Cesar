@@ -8,12 +8,32 @@ def main(page: ft.Page):
     #Cambiando el tema
     page.theme_mode = ft.ThemeMode.DARK
 
-    txt = ft.TextField(disabled=True,value="0",text_align="right")
+    txt = ft.TextField(
+        hint_text="0",text_align="right",
+        bgcolor="#FFFFFF",color="#191919")
     page.add(txt)
 
     def click(e):
-        txt.value = button.text
-    
+        txt.value = txt.value + e.control.text
+        txt.update()
+        
+    def operations(e):
+        if(txt.value != ""):
+            print(txt.value.split())
+        if(e.control == mas):
+            txt.value = txt.value + "+"
+            
+        else:
+            txt.value = txt.value + "-"
+        txt.update()
+
+    def equals(e):
+        txt.value = str(int(eval(txt.value)))
+        txt.update()
+
+    def borrar(e):
+        txt.value = ""
+        txt.update()
 
     for i in range(1,10,3):
         page.add(ft.Row([
@@ -21,6 +41,16 @@ def main(page: ft.Page):
             ft.ElevatedButton(f"{i + 1}",width=85,height=50,on_click=click),
             ft.ElevatedButton(f"{i + 2}",width=85,height=50,on_click=click)
         ]))
+
+    mas = ft.IconButton(ft.icons.ADD,on_click=operations)
+    menos = ft.IconButton(ft.icons.INDETERMINATE_CHECK_BOX,on_click=operations)
+    igual = ft.IconButton(ft.icons.ARROW_CIRCLE_RIGHT,on_click=equals)
+    borrar = ft.IconButton(ft.icons.DELETE,on_click=borrar)
+
+    page.add(ft.Row([
+        mas,menos,igual,borrar
+    ],alignment=ft.MainAxisAlignment.CENTER))
+
      
 
 
