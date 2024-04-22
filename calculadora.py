@@ -4,13 +4,13 @@ def main(page: ft.Page):
     page.window_resizable = False
     page.window_width = 300
     page.window_height = 400
+    page.padding = 30
 
     #Cambiando el tema
     page.theme_mode = ft.ThemeMode.DARK
 
     txt = ft.TextField(
-        hint_text="0",text_align="right",
-        bgcolor="#FFFFFF",color="#191919")
+        hint_text="0",text_align="right")
     page.add(txt)
 
     def click(e):
@@ -18,13 +18,11 @@ def main(page: ft.Page):
         txt.update()
         
     def operations(e):
-        if(txt.value != ""):
-            print(txt.value.split())
-        if(e.control == mas):
-            txt.value = txt.value + "+"
-            
-        else:
-            txt.value = txt.value + "-"
+        if (txt.value[-1] not in ("+", "-")):
+            if(e.control == mas):
+                txt.value = txt.value + "+"
+            else:
+                txt.value = txt.value + "-"
         txt.update()
 
     def equals(e):
@@ -37,10 +35,10 @@ def main(page: ft.Page):
 
     for i in range(1,10,3):
         page.add(ft.Row([
-            ft.ElevatedButton(f"{i}",width=85,height=50,on_click=click),
-            ft.ElevatedButton(f"{i + 1}",width=85,height=50,on_click=click),
-            ft.ElevatedButton(f"{i + 2}",width=85,height=50,on_click=click)
-        ]))
+            ft.ElevatedButton(f"{i}",width=65,height=50,on_click=click),
+            ft.ElevatedButton(f"{i + 1}",width=65,height=50,on_click=click),
+            ft.ElevatedButton(f"{i + 2}",width=65,height=50,on_click=click)
+        ],alignment=ft.MainAxisAlignment.CENTER))
 
     mas = ft.IconButton(ft.icons.ADD,on_click=operations)
     menos = ft.IconButton(ft.icons.INDETERMINATE_CHECK_BOX,on_click=operations)
