@@ -59,8 +59,5 @@ def main(page: ft.Page):
     page.add(ft.Row([
         igual,borrar
     ],alignment=ft.MainAxisAlignment.CENTER))
-
-
-    
     
 ft.app(target=main)
