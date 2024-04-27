@@ -22,11 +22,14 @@ def main(page: ft.Page):
             print(texto)
 
     def cambio(e):
-
+        #Algoritmo que elimina todo excepto numeros y un solo punto
         if(txt.value != ""):
+            #Para solo dejar entrar teclas que no son numeros
             if not(txt.value[len(txt.value ) - 1].isdecimal()):
+                #Eliminacion del punto
                 if(txt.value[len(txt.value ) - 1] == "."):
                     cont = 0
+                    #Ciclo buscador de varios puntos
                     for i in range(0,len(txt.value) - 1):
                         if(txt.value[i] == "."):
                             cont += 1
@@ -35,12 +38,10 @@ def main(page: ft.Page):
                         txt.value = txt.value[0:len(txt.value) - 1]
 
                 else:
+                    #Eliminacion de la letra o todo lo demas
                     txt.value = txt.value.replace(txt.value[-1],"")
                 
             txt.update()
-
-            
-    
 
     txt = ft.TextField(text_align="right",on_change=cambio)
 
