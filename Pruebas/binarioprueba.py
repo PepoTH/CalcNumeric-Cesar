@@ -15,11 +15,9 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
 
     def accion(e):
-        if(txt.value != ""):
-            texto = ["Hola"]
-            texto.remove("Hola")
-            
-            print(texto)
+        for i in range(0,len(txt.value) - 1):
+            #Algoritmo de respuesta aqui 
+            print("hola")
 
     def cambio(e):
         #Algoritmo que elimina todo excepto numeros y un solo punto
@@ -43,7 +41,7 @@ def main(page: ft.Page):
                 
             txt.update()
 
-    txt = ft.TextField(text_align="right",on_change=cambio)
+    txt = ft.TextField(text_align="left",on_change=cambio,hint_text="Ingrese un numero")
 
     page.add(txt,ft.ElevatedButton("Convertir",on_click=accion))
     
