@@ -1,10 +1,11 @@
+
 import time
 import flet as ft
 
 def main(page: ft.Page):
     page.window_resizable = False
-    page.window_width = 300
-    page.window_height = 600
+    page.window_width = 350
+    page.window_height = 700
     page.padding = 30
     
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
@@ -30,7 +31,7 @@ def main(page: ft.Page):
             txt2.disabled = True
             txt3.disabled = True
             txt4.disabled = True
-            pb = ft.ProgressBar(0)
+            pb = ft.ProgressBar(0,border_radius=20)
             page.add(pb)
 
             #Aumentando barra de progreso
@@ -41,6 +42,7 @@ def main(page: ft.Page):
 
             #Continuar desde aqui con la siguiente seccion
             print("Inicializando")
+            
 
     #Agregando Texfields
     txt1 = ft.TextField(width=40,height=50,text_size=20,content_padding=10,text_align = "center",on_change=valid)
