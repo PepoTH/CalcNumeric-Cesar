@@ -22,12 +22,25 @@ def main(page: ft.Page):
             print(texto)
 
     def cambio(e):
+
         if(txt.value != ""):
-            if not(txt.value[len(txt.value) - 1].isdecimal()):
-                txt.value = txt.value.replace(txt.value[-1],"")
-                txt.update()
+            if not(txt.value[len(txt.value ) - 1].isdecimal()):
+                if(txt.value[len(txt.value ) - 1] == "."):
+                    cont = 0
+                    for i in range(0,len(txt.value) - 1):
+                        if(txt.value[i] == "."):
+                            cont += 1
+
+                    if(cont == 1):
+                        txt.value = txt.value[0:len(txt.value) - 1]
+
+                else:
+                    txt.value = txt.value.replace(txt.value[-1],"")
+                
+            txt.update()
+
             
-            
+    
 
     txt = ft.TextField(text_align="right",on_change=cambio)
 
