@@ -20,26 +20,32 @@ def main(page: ft.Page):
         if("." in str(n)):
             dec = round((n - int(n)),4)
             n = math.trunc(n)
-
+            
         num = ""
         while(n > 0):
             num = str(n % 2) + num
             n = n // 2
 
+        if(n == 0) :
+            num = str(0) + num
         num = num + "."
 
         cont = 0
-        while(dec > 0 or cont > 3):
+        while(cont < 4):
             num = num + str(math.trunc(dec * 2))
+            dec = round(((dec * 2) - int(dec * 2)),4)
             cont += 1
 
         return num
     
     def decimal(n):
+        #Agregar binario a decimal
         pass
 
     def accion(e):
+        #Arreglar la entrada de datos
         print(binario(0.650))
+        txt.update()
 
     def cambio(e):
         #Algoritmo que elimina todo excepto numeros y un solo punto
