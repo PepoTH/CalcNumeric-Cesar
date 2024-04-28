@@ -21,14 +21,11 @@ def main(page: ft.Page):
         if("." in str(n)):
             dec = round((n - int(n)),4)
             n = math.trunc(n)
-            print(n)
-            print(dec)
             
         num = ""
         while(n > 0):
             num = str(n % 2) + num
             n = n // 2
-        print(num)
 
         if(n == 0) :
             num = str(0) + num
@@ -39,7 +36,8 @@ def main(page: ft.Page):
             num = num + str(math.trunc(dec * 2))
             dec = round(((dec * 2) - int(dec * 2)),4)
             cont += 1
-            print(num)
+
+        #Falta simplificar en caso que solo sea entero
 
         return num
     
@@ -48,9 +46,7 @@ def main(page: ft.Page):
         pass
 
     def accion(e):
-        #Arreglar la entrada de datos
-        valor = int()
-        print(binario(valor))
+        print(binario(float(txt.value)))
         txt.update()
 
     def cambio(e):
