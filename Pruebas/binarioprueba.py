@@ -1,4 +1,6 @@
+import math
 import flet as ft
+
 
 def main(page: ft.Page):
 
@@ -14,10 +16,30 @@ def main(page: ft.Page):
 
     page.theme_mode = ft.ThemeMode.LIGHT
 
+    def binario(n):
+        if("." in str(n)):
+            dec = round((n - int(n)),4)
+            n = math.trunc(n)
+
+        num = ""
+        while(n > 0):
+            num = str(n % 2) + num
+            n = n // 2
+
+        num = num + "."
+
+        cont = 0
+        while(dec > 0 or cont > 3):
+            num = num + str(math.trunc(dec * 2))
+            cont += 1
+
+        return num
+    
+    def decimal(n):
+        pass
+
     def accion(e):
-        for i in range(0,len(txt.value) - 1):
-            #Algoritmo de respuesta aqui 
-            print("hola")
+        print(binario(0.650))
 
     def cambio(e):
         #Algoritmo que elimina todo excepto numeros y un solo punto
