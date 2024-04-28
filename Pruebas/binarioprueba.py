@@ -17,14 +17,18 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
 
     def binario(n):
+        dec = 0
         if("." in str(n)):
             dec = round((n - int(n)),4)
             n = math.trunc(n)
+            print(n)
+            print(dec)
             
         num = ""
         while(n > 0):
             num = str(n % 2) + num
             n = n // 2
+        print(num)
 
         if(n == 0) :
             num = str(0) + num
@@ -35,6 +39,7 @@ def main(page: ft.Page):
             num = num + str(math.trunc(dec * 2))
             dec = round(((dec * 2) - int(dec * 2)),4)
             cont += 1
+            print(num)
 
         return num
     
@@ -44,7 +49,8 @@ def main(page: ft.Page):
 
     def accion(e):
         #Arreglar la entrada de datos
-        print(binario(0.650))
+        valor = int()
+        print(binario(valor))
         txt.update()
 
     def cambio(e):
