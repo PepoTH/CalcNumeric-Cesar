@@ -41,6 +41,7 @@ def main(page: ft.Page):
                 pb.update()
 
             #Continuar desde aqui con la siguiente seccion
+            
             print("Inicializando")
             
 
