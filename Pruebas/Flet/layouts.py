@@ -27,10 +27,8 @@ def main(page: ft.Page):
     page.padding = 30
 
     page.theme_mode = ft.ThemeMode.LIGHT
-
     
-    
-    #page.add(content1,content2,content3)
+    page.add(content1,content2,content3)
 
     def resize(e):
         content1.width = page.window_width*0.8
