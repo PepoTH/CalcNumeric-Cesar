@@ -3,17 +3,24 @@ import flet as ft
 def main(page: ft.Page):
     page.window_resizable = False
     page.window_width = 400
-    page.window_height = 800
-    page.padding = 40
-
-    page.theme_mode = ft.ThemeMode.LIGHT
+    page.window_height = 500
+    page.padding = 30
     
-    page.window_center()
+    page.theme_mode = ft.ThemeMode.LIGHT
 
-    container = ft.Container(ft.Column([
-        ft.Text("Prueba")
-    ]),bgcolor="red",width=page.window_width*0.80,height=page.window_height*0.7)
+    txt = ft.TextField()
 
-    page.add(ft.Text("Facturas",weight=ft.FontWeight.BOLD,size=30),container)
+    contenedor = ft.Container(
+        ft.Column([
+            ft.Row([
+                ft.Text("Facturacion")
+            ],alignment=ft.MainAxisAlignment.CENTER),
+            ft.Row([
+                txt
+            ],alignment=ft.MainAxisAlignment.CENTER)
+        ])
+    ,bgcolor='red',height=page.window_height*0.8,padding=20)
+
+    page.add(contenedor)
     
 ft.app(target=main)
