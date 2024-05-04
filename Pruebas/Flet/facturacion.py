@@ -8,9 +8,9 @@ def main(page: ft.Page):
     
     page.theme_mode = ft.ThemeMode.LIGHT
 
-    txt = ft.TextField()
+    txt = ft.TextField(label='Buscar')
 
-    contenedor = ft.Container(
+    titulo = ft.Container(
         ft.Column([
             ft.Row([
                 ft.Text("Facturacion")
@@ -19,8 +19,23 @@ def main(page: ft.Page):
                 txt
             ],alignment=ft.MainAxisAlignment.CENTER)
         ])
-    ,bgcolor='red',height=page.window_height*0.8,padding=20)
+    ,padding=20,margin=-10)
 
-    page.add(contenedor)
+    #256 128 64 32 16 8 4 2 0
+    #
+
+    lista = ft.ListView(padding=20,spacing=10,height=250)
+
+    filaADD = ft.Row([
+        ft.FilledButton('+',width=300)
+    ],alignment=ft.MainAxisAlignment.CENTER)
+
+    page.add(titulo,lista,filaADD)
+
+    for i in range(0,20):
+        lista.controls.append(ft.OutlinedButton('Hola'))
+        lista.update()
+
+    
     
 ft.app(target=main)
