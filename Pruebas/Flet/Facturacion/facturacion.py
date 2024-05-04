@@ -1,4 +1,5 @@
 import flet as ft
+import factura
 
 def main(page: ft.Page):
     page.window_resizable = False
@@ -8,7 +9,21 @@ def main(page: ft.Page):
     
     page.theme_mode = ft.ThemeMode.LIGHT
 
-    txt = ft.TextField(label='Buscar')
+    def buscador(e):
+        if(len(lista.controls) != 0):
+            if(txt.value != ""):
+                for i in range(0,len(lista.controls)):
+                    if(txt.value in lista.controls[i].text):
+                        print(lista.controls[i].text)
+                        lista.controls[i].focus()
+                
+                   
+        
+                    
+
+                    
+
+    txt = ft.TextField(label='Buscar',on_change=buscador)
 
     titulo = ft.Container(
         ft.Column([
@@ -20,9 +35,6 @@ def main(page: ft.Page):
             ],alignment=ft.MainAxisAlignment.CENTER)
         ])
     ,padding=20,margin=-15)
-
-    #256 128 64 32 16 8 4 2 0
-    #
 
     lista = ft.ListView(padding=20,spacing=10,height=250)
 
@@ -36,10 +48,21 @@ def main(page: ft.Page):
             if(name.value != ""):
                 inicio.visible = True
                 def detalles(e):
-                    print('Detalles')
+                    alerta = ft.BottomSheet(
+                        ft.Container(
+                            ft.Column([
+                                ft.Text(e.control.text)
+                            ]),width=300,height=200,padding=30
+                        )
+                        ,open=True
+                    )
+                    page.overlay.append(alerta)
+                    page.update()
                     #Continuar con los detalles
 
-                lista.controls.append(ft.OutlinedButton(name.value,on_click=detalles))
+                fact = factura.factura(name.value)
+
+                lista.controls.append(ft.OutlinedButton(fact.getName(),on_click=detalles))
                 data.visible = False
                 page.update()
                 
