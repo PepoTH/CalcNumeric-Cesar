@@ -35,7 +35,7 @@ def main(page: ft.Page):
         inicio.visible = False
         page.update()
     
-        name = ft.TextField(label='Nombre')
+        name = ft.TextField(label='Nombre Factura')
         entrega = ft.TextField(label='Fecha de entrega')
         destinatario = ft.TextField(label='Destinatario')
         encargado = ft.TextField(label='Encargado')
@@ -73,7 +73,7 @@ def main(page: ft.Page):
                 page.update()
     
         data = ft.Container(ft.Column([
-            ft.Text('Ingrese nombre para la factura'), name,
+            ft.Text('Ingrese datos para la factura'), name,
             entrega, destinatario, encargado, cantidad,
             ft.FilledButton('Listo', on_click=ready)
         ]))
