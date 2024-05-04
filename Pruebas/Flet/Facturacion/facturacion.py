@@ -14,14 +14,7 @@ def main(page: ft.Page):
             if(txt.value != ""):
                 for i in range(0,len(lista.controls)):
                     if(txt.value in lista.controls[i].text):
-                        print(lista.controls[i].text)
-                        lista.controls[i].focus()
-                
-                   
-        
-                    
-
-                    
+                        lista.controls[i].focus()               
 
     txt = ft.TextField(label='Buscar',on_change=buscador)
 
@@ -41,39 +34,52 @@ def main(page: ft.Page):
     def agregar(e):
         inicio.visible = False
         page.update()
-        
+    
         name = ft.TextField(label='Nombre')
-        
+        entrega = ft.TextField(label='Fecha de entrega')
+        destinatario = ft.TextField(label='Destinatario')
+        encargado = ft.TextField(label='Encargado')
+        cantidad = ft.TextField(label='Cantidad')
+    
         def ready(e):
-            if(name.value != ""):
+            if name.value!= "":
                 inicio.visible = True
+                fact = factura.factura(**{
+                    'name': name.value,
+                    'entrega': entrega.value,
+                    'destinatario': destinatario.value,
+                    'encargado': encargado.value,
+                    'cantidad': cantidad.value
+                })
+            
                 def detalles(e):
                     alerta = ft.BottomSheet(
                         ft.Container(
                             ft.Column([
-                                ft.Text(e.control.text)
-                            ]),width=300,height=200,padding=30
-                        )
-                        ,open=True
+                                ft.Text(f"Nombre: {fact.getName()}"),
+                                ft.Text(f"Fecha de entrega: {fact.getFechaEntrega()}"),
+                                ft.Text(f"Destinatario: {fact.getDestinatario()}"),
+                                ft.Text(f"Encargado: {fact.getEncargado()}"),
+                                ft.Text(f"Cantidad: {fact.getCantidad()}")
+                            ]), width=300, height=200, padding=30
+                        ),
+                        open=True
                     )
                     page.overlay.append(alerta)
                     page.update()
-                    #Continuar con los detalles
-
-                fact = factura.factura(name.value)
-
-                lista.controls.append(ft.OutlinedButton(fact.getName(),on_click=detalles))
+            
+                lista.controls.append(ft.OutlinedButton(fact.getName(), on_click=detalles))
                 data.visible = False
                 page.update()
-                
-        
+    
         data = ft.Container(ft.Column([
-            ft.Text('Ingrese nombre para la factura'),name
-            ,ft.FilledButton('Listo',on_click=ready)
+            ft.Text('Ingrese nombre para la factura'), name,
+            entrega, destinatario, encargado, cantidad,
+            ft.FilledButton('Listo', on_click=ready)
         ]))
-        
+    
         page.add(data)
-
+    
         page.update()
 
     filaADD = ft.Row([
