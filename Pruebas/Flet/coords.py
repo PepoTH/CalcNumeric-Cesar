@@ -10,9 +10,12 @@ def main(page: ft.Page):
     #x e y, top el espacio hacia arriba del componente y left el espacio hacia la izquierda
 
     stack = ft.Stack([
-        ft.Column([
-            txt
-        ],top=60,left=30)
+        ft.Row([
+            txt,ft.TextField()
+        ],top=60,left=30),
+        ft.Row([
+            ft.Text('Mundo'),ft.TextField()
+        ],top=60,left=30),
     ])
     
     page.add(stack)
