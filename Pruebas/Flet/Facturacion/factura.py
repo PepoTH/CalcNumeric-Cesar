@@ -1,3 +1,5 @@
+import flet as ft
+
 class factura:
 
     def __init__(self,name,entrega,destinatario,encargado,cantidad):
@@ -6,6 +8,7 @@ class factura:
         self.destinatario = destinatario
         self.encargado = encargado
         self.cantidad = cantidad
+
     
     def getName(self):
         return self.name

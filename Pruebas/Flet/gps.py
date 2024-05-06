@@ -8,6 +8,7 @@ def main(page: ft.Page):
     page.window_height = 700
     page.padding = 30
     
+    
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
