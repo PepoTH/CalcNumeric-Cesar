@@ -12,7 +12,7 @@ def main(page: ft.Page):
     stack = ft.Stack([
         ft.Row([
             txt,ft.TextField()
-        ],top=60,left=30),
+        ],top=60,left=300),
         ft.Row([
             ft.Text('Mundo'),ft.TextField()
         ],top=60,left=30),
