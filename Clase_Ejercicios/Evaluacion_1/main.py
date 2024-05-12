@@ -12,7 +12,7 @@ def main(page: ft.Page):
 
     def gauss(e):
         _main_.visible = False
-        gauss.visible = True
+        gaussiana.visible = True
         page.update()
 
     def conv(e):
@@ -36,7 +36,15 @@ def main(page: ft.Page):
         desde.value = None
         page.update()
 
-    gaussiana = ft.Container()
+    gaussiana = ft.Container(
+        ft.Column([
+            ft.Row([
+                ft.Text('Gauss-Seidel',weight=ft.FontWeight.W_500,
+                    font_family='Poppins',size=15)
+            ],alignment=ft.MainAxisAlignment.CENTER),
+        ])
+    )
+
     txt = ft.TextField(width=page.width*0.25,label='Numero',
                        border_color='#E1E1E1',border_radius=10)
     
@@ -84,7 +92,6 @@ def main(page: ft.Page):
             ],vertical_alignment=ft.MainAxisAlignment.END)
         ],spacing=75,alignment='center')
     )
-    gaussiana.visible = False
 
     btns = ft.Row([
             ft.FilledButton('Gaussiana',style=ft.ButtonStyle(bgcolor='#6F86FF'),on_click=gauss),
@@ -100,7 +107,8 @@ def main(page: ft.Page):
     )
 
     conversiones.visible = False
+    gaussiana.visible = False
 
-    page.add(_main_,conversiones)
+    page.add(_main_,conversiones,gaussiana)
     
 ft.app(target=main)
