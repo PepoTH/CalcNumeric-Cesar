@@ -27,24 +27,37 @@ def main(page: ft.Page):
         page.update()     
 
     def convert(e):
-        if(txt.value != '' and opciones.value != None):
-            print(str(sistemas(txt.value,opciones.value)))
+        if(txt.value != '' and desde.value != None):
+            txt.value = str(sistemas(txt.value,desde.value,hacia.value))
+            txt.update()
 
     def clear(e):
         txt.value = ''
-        opciones.value = None
+        desde.value = None
         page.update()
 
     gaussiana = ft.Container()
-    txt = ft.TextField(width=page.width*0.3,label='Introduzca un Numero',
+    txt = ft.TextField(width=page.width*0.25,label='Numero',
                        border_color='#E1E1E1',border_radius=10)
     
-    opciones = ft.Dropdown(width=page.width*0.15,border_color='#E1E1E1'
+    desde = ft.Dropdown(width=page.width*0.10,border_color='#E1E1E1'
                                 ,border_radius=10,hint_text='N/A',options=[
                                     ft.dropdown.Option('Dec'),
                                     ft.dropdown.Option('Bin'),
                                     ft.dropdown.Option('Oct'),
-                                    ft.dropdown.Option('Hex')
+                                    ft.dropdown.Option('Hex'),
+                                    ft.dropdown.Option('Ter'),
+                                    ft.dropdown.Option('Cuar'),
+                                ])
+    
+    hacia = ft.Dropdown(width=page.width*0.10,border_color='#E1E1E1'
+                                ,border_radius=10,hint_text='N/A',options=[
+                                    ft.dropdown.Option('Dec'),
+                                    ft.dropdown.Option('Bin'),
+                                    ft.dropdown.Option('Oct'),
+                                    ft.dropdown.Option('Hex'),
+                                    ft.dropdown.Option('Ter'),
+                                    ft.dropdown.Option('Cuar'),
                                 ])
     
     conversiones = ft.Container(
@@ -55,7 +68,7 @@ def main(page: ft.Page):
             ],alignment=ft.MainAxisAlignment.CENTER),
             ft.Column([
                 ft.Row([
-                    txt,opciones
+                    txt,desde,hacia
                         ],alignment='center'),
                 ft.Row([
                     ft.FilledButton('Convertir'
