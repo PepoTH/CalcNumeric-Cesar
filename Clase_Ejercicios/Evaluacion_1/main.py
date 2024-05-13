@@ -1,6 +1,6 @@
 import flet as ft
-import time
 from funciones import *
+import numpy as np
 
 def main(page: ft.Page):
     page.window_resizable = False
@@ -27,14 +27,56 @@ def main(page: ft.Page):
         page.update()     
 
     def convert(e):
-        if(txt.value != '' and desde.value != None):
+        if(txt.value != '' and desde.value != None and hacia.value != None):
             txt.value = str(sistemas(txt.value,desde.value,hacia.value))
             txt.update()
 
     def clear(e):
         txt.value = ''
         desde.value = None
+        hacia.value = None
         page.update()
+
+    def crear(e):
+        cuadro.controls.clear()
+        numeros = ft.TextField(width=20,height=20,text_size=10
+                     ,content_padding=0,text_align='center'
+                     ,border_color='#f0f0f0',value='')
+        if(txtSize.value != ''):
+            for i in range(0,int(txtSize.value)):
+                fila = ft.Row([],alignment='center')
+                for j in range(0,int(txtSize.value) + 1):
+                    fila.controls.append(numeros)
+                    if(j == int(txtSize.value) - 1):
+                        fila.controls.append(ft.Text('='))
+                cuadro.controls.append(fila)
+            page.update()
+        pass
+
+    def borrar(e):
+        cuadro.controls.clear()
+        txtSize.value = ''
+        txtSolucion.value = ''
+        page.update()
+    cuadro = ft.Column([
+        
+    ],alignment=ft.MainAxisAlignment.CENTER)
+
+    contentMat =ft.Container(width=220,height=200
+        ,bgcolor='white',margin=ft.margin.only(top=30),border_radius=20,
+        shadow=ft.BoxShadow(0.5,5,'#D0D0D8'),padding=15,content=cuadro)
+        
+    #Forma de Capturar 
+    #print(cuadro.controls[0].controls[0].value)a
+    
+    txtSize = ft.TextField(width=50
+            ,height=50,content_padding=10,text_align='center',
+            border_color='#D0D0D8',hint_text='n',border_radius=15)
+    
+    txtSolucion = ft.TextField(width=100
+            ,height=90,content_padding=10,text_align='center',text_size=13,
+            border_color='#D0D0D8',hint_text='Soluciones'
+            ,border_radius=15,disabled=True,multiline=True,max_lines=5,min_lines=7)
 
     gaussiana = ft.Container(
         ft.Column([
@@ -42,6 +84,31 @@ def main(page: ft.Page):
                 ft.Text('Gauss-Seidel',weight=ft.FontWeight.W_500,
                     font_family='Poppins',size=15)
             ],alignment=ft.MainAxisAlignment.CENTER),
+            ft.Row([
+                ft.FilledButton('Automatico',style=ft.ButtonStyle(bgcolor='#6F86FF'))
+            ],alignment='center'),
+            ft.Row([
+                ft.Column([
+                    contentMat
+                ]),
+                ft.Column([
+                    ft.Row([
+                        txtSize,
+                        ft.FilledButton('Crear',style=ft.ButtonStyle(color='#6F86FF',bgcolor='white'),on_click=crear)
+                    ],alignment='center',width=170),
+                    ft.Row([
+                        ft.FilledButton('Resolver',style=ft.ButtonStyle(bgcolor='#6F86FF'),width=130)
+                    ],alignment='center',width=170),
+                    ft.Row([
+                        txtSolucion,
+                        ft.Column([
+                            ft.IconButton(ft.icons.DELETE,on_click=borrar,icon_color='#6F86FF'),
+                            ft.IconButton(ft.icons.EXIT_TO_APP,on_click=back,icon_color='#6F86FF')
+                        ],spacing=0)
+                    ],alignment='center',width=170)
+                ],alignment='center',height=260)
+            ],vertical_alignment='start')
+            
         ])
     )
 
@@ -81,9 +148,9 @@ def main(page: ft.Page):
                 ft.Row([
                     ft.FilledButton('Convertir'
                                 ,style=ft.ButtonStyle(bgcolor='#6F86FF'),
-                                    width=270,on_click=convert),
-                    ft.IconButton(ft.icons.DELETE,icon_color='#6F86FF',on_click=clear),
-                    ft.IconButton(ft.icons.LIST,disabled=True,icon_color='#6F86FF')
+                                    width=200,on_click=convert),
+                    ft.IconButton(ft.icons.DELETE,icon_color='#6F86FF',on_click=clear)
+                    
                         ],alignment='center')
             ],alignment=ft.MainAxisAlignment.CENTER)
 
@@ -107,8 +174,9 @@ def main(page: ft.Page):
     )
 
     conversiones.visible = False
-    gaussiana.visible = False
+    gaussiana.visible = True
 
-    page.add(_main_,conversiones,gaussiana)
+    #
+    page.add(conversiones,gaussiana)
     
 ft.app(target=main)

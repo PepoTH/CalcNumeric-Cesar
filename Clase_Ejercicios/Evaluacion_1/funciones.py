@@ -7,6 +7,10 @@ def sistemas(valor,desde,hacia):
         return hexa(valor,hacia)
     elif(desde=='Oct'):
         return octa(valor,hacia)
+    elif(desde=='Ter'):
+        return basen(valor,hacia,3)
+    elif(desde=='Cuar'):
+        return basen(valor,hacia,4)
     
 def binario(valor,hacia):
     try:
@@ -16,6 +20,10 @@ def binario(valor,hacia):
             return str(hex(int(valor)))[2:].upper()
         elif(hacia == 'Oct'):
             return str(oct(int(valor)))[2:]
+        elif(hacia == 'Ter'):
+            return toBase(binario(valor,'Dec'),3)
+        elif(hacia == 'Cuar'):
+            return toBase(binario(valor,'Dec'),4)
         else:
             return valor
     except ValueError:
@@ -24,11 +32,15 @@ def binario(valor,hacia):
 def decimal(valor,hacia):
     try:
         if(hacia=='Bin'):
-            return bin(int(valor,2))[2:]
+            return bin(int(valor))[2:]
         elif(hacia == 'Hex'):
             return str(hex(int(valor)))[2:].upper()
         elif(hacia == 'Oct'):
             return str(oct(int(valor)))[2:]
+        elif(hacia == 'Ter'):
+            return toBase(valor,3)
+        elif(hacia == 'Cuar'):
+            return toBase(valor,4)
         else:
             return valor
     except ValueError:
@@ -42,6 +54,10 @@ def hexa(valor,hacia):
             return int(valor,16)
         elif(hacia == 'Oct'):
             return str(oct(int(valor)))[2:]
+        elif(hacia == 'Ter'):
+            return toBase(hexa(valor,'Dec'),3)
+        elif(hacia == 'Cuar'):
+            return toBase(hexa(valor,'Dec'),4)
         else:
             return valor
     except ValueError:
@@ -55,7 +71,37 @@ def octa(valor,hacia):
             return int(valor,8)
         elif(hacia == 'Hex'):
             return oct(int(valor))
+        elif(hacia == 'Ter'):
+            return toBase(octa(valor,'Dec'),3)
+        elif(hacia == 'Cuar'):
+            return toBase(octa(valor,'Dec'),4)
         else:
             return valor
     except ValueError:
         return 'Error'
+    
+def basen(valor,hacia,n):
+    try:
+        valor = str(int(valor,n))
+        if(hacia=='Dec'):
+            return valor
+        elif(hacia=='Bin'):
+            return decimal(valor,hacia)
+        elif(hacia=='Hex'):
+            return decimal(valor,hacia)
+        elif(hacia=='Oct'):
+            return decimal(valor,hacia)
+        elif(hacia == 'Ter'):
+            return toBase(int(valor),3)
+        elif(hacia == 'Cuar'):
+            return toBase(int(valor),4)
+    except ValueError:
+        return 'Error'
+    
+def toBase(valor,base):
+    word = ''
+    valor = int(valor)
+    while valor:
+        word += str(valor % base)
+        valor //= base
+    return word[::-1]
