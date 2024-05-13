@@ -1,5 +1,6 @@
 import numpy as np
 
+#Distribuidor de Sistemas
 def sistemas(valor,desde,hacia):
     if(desde=='Bin'):
         return binario(valor,hacia)
@@ -14,6 +15,7 @@ def sistemas(valor,desde,hacia):
     elif(desde=='Cuar'):
         return basen(valor,hacia,4)
     
+#Sistemas Numericos
 def binario(valor,hacia):
     try:
         if(hacia=='Dec'):
@@ -108,16 +110,23 @@ def toBase(valor,base):
         valor //= base
     return word[::-1]
 
+#Metodo para realizar Gauss-Seidel
 def seidel(A, b, x0, tol=1e-6, max_iter=1000):
-    n = len(b)
-    x = np.copy(x0)
-    for it in range(max_iter):
-        for i in range(n):
-            s = sum(A[i, j] * x[j] for j in range(i) if j != n)
-            s += sum(A[i, j] * x[j] for j in range(i + 1, n))
-            s += b[i]
-            x[i] = s / A[i, i]
-        if np.linalg.norm(x - x0) < tol:
-            return x
-        x0 = np.copy(x)
+    try:
+        n = len(b)
+        x = np.copy(x0)
+        for it in range(max_iter):
+            for i in range(n):
+                try:
+                    s = sum(A[i, j] * x[j] for j in range(i) if j != n)
+                    s += sum(A[i, j] * x[j] for j in range(i + 1, n))
+                    s += b[i]
+                    x[i] = s / A[i, i]
+                except RuntimeWarning:
+                    pass
+            if np.linalg.norm(x - x0) < tol:
+                return x
+            x0 = np.copy(x)
+    except RuntimeWarning or RuntimeError:
+        return None
     
