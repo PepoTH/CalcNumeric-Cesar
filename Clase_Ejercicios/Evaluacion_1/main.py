@@ -39,18 +39,37 @@ def main(page: ft.Page):
 
     def crear(e):
         cuadro.controls.clear()
-        numeros = ft.TextField(width=20,height=20,text_size=10
-                     ,content_padding=0,text_align='center'
-                     ,border_color='#f0f0f0',value='')
+        
         if(txtSize.value != ''):
             for i in range(0,int(txtSize.value)):
                 fila = ft.Row([],alignment='center')
                 for j in range(0,int(txtSize.value) + 1):
+                    numeros = ft.TextField(width=20,height=20,text_size=10
+                     ,content_padding=0,text_align='center'
+                     ,border_color='#f0f0f0',value='')
                     fila.controls.append(numeros)
                     if(j == int(txtSize.value) - 1):
                         fila.controls.append(ft.Text('='))
                 cuadro.controls.append(fila)
             page.update()
+        pass
+
+    def resolver():
+        A = np.zeros((len(cuadro.controls),len(cuadro.controls)))
+        b = np.zeros((len(cuadro.controls),1))
+
+        for i in range(0,len(cuadro.controls)):
+            for j in range(0,len(cuadro.controls) + 1):
+                if(j == len(cuadro.controls)):
+                    b[i] = float(cuadro.controls[i].controls[j + 1].value)
+                else:
+                    A[i][j] = float(cuadro.controls[i].controls[j].value)     
+
+        print(A,'\n',b)
+        pass
+
+    def btnSolve(e):
+        resolver()
         pass
 
     def borrar(e):
@@ -97,7 +116,7 @@ def main(page: ft.Page):
                         ft.FilledButton('Crear',style=ft.ButtonStyle(color='#6F86FF',bgcolor='white'),on_click=crear)
                     ],alignment='center',width=170),
                     ft.Row([
-                        ft.FilledButton('Resolver',style=ft.ButtonStyle(bgcolor='#6F86FF'),width=130)
+                        ft.FilledButton('Resolver',style=ft.ButtonStyle(bgcolor='#6F86FF'),width=130,on_click=btnSolve)
                     ],alignment='center',width=170),
                     ft.Row([
                         txtSolucion,
