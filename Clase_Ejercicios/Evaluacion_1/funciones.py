@@ -1,3 +1,5 @@
+import numpy as np
+
 def sistemas(valor,desde,hacia):
     if(desde=='Bin'):
         return binario(valor,hacia)
@@ -105,3 +107,17 @@ def toBase(valor,base):
         word += str(valor % base)
         valor //= base
     return word[::-1]
+
+def seidel(A, b, x0, tol=1e-6, max_iter=1000):
+    n = len(b)
+    x = np.copy(x0)
+    for it in range(max_iter):
+        for i in range(n):
+            s = sum(A[i, j] * x[j] for j in range(i) if j != n)
+            s += sum(A[i, j] * x[j] for j in range(i + 1, n))
+            s += b[i]
+            x[i] = s / A[i, i]
+        if np.linalg.norm(x - x0) < tol:
+            return x
+        x0 = np.copy(x)
+    
