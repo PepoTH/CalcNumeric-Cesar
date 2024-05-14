@@ -11,6 +11,19 @@ def main(page: ft.Page):
     page.padding = 30
     
     page.theme_mode = ft.ThemeMode.LIGHT
+    azul = '#6F86FF'
+
+    def temas(e):
+        if(e.control.value == True):
+            page.theme_mode = ft.ThemeMode.LIGHT
+            contentMat.bgcolor = 'white'
+            azul = '#6F86FF'
+        else:
+
+            page.theme_mode = ft.ThemeMode.DARK
+            contentMat.bgcolor = '#252525'
+            
+        page.update()
     
     #Creacion de Eventos --------------------------------
     #Evento para transportar desde main hasta gauss
@@ -30,7 +43,7 @@ def main(page: ft.Page):
     #Evento para validar el textField de las conversiones
     def validConvert(e):
         if not(e.control.value == ''):
-            if not(e.control.value[-1] in ['1','2','3','4','5','6','7','8','9','A','B','C','D','E','F']):
+            if not(e.control.value[-1] in ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F']):
                 e.control.value = e.control.value[0:len(e.control.value) - 1]
                 e.control.update()
 
@@ -39,7 +52,7 @@ def main(page: ft.Page):
         if(e.control.value != ''):
             if(len(e.control.value)>3):
                 e.control.value = e.control.value[3:]
-            if not(e.control.value[-1] in ['1','2','3','4','5','6','7','8','9','0']):
+            if not(e.control.value[-1] in ['1','2','3','4','5','6','7','8','9','0','-','.']):
                 e.control.value = ''
         e.control.update()
 
@@ -183,7 +196,7 @@ def main(page: ft.Page):
             ,border_radius=15,disabled=True,multiline=True,min_lines=7)
     
     toSolve = ft.FilledButton('Resolver'
-            ,style=ft.ButtonStyle(bgcolor='#6F86FF')
+            ,style=ft.ButtonStyle(bgcolor=azul)
             ,width=130,on_click=btnSolve)
 
     #Container con toda la interfaz de Gauss-Seidel
@@ -194,8 +207,8 @@ def main(page: ft.Page):
                     font_family='Poppins',size=15)
             ],alignment=ft.MainAxisAlignment.CENTER),
             ft.Row([
-                ft.FilledButton('Automatico',style=ft.ButtonStyle(bgcolor='#6F86FF'),on_click=aleatorio),
-                ft.IconButton(ft.icons.INFO_OUTLINE,icon_color='#6F86FF',on_click=intructions)
+                ft.FilledButton('Automatico',style=ft.ButtonStyle(bgcolor=azul),on_click=aleatorio),
+                ft.IconButton(ft.icons.INFO_OUTLINE,icon_color=azul,on_click=intructions)
             ],alignment='center'),
             ft.Row([
                 ft.Column([
@@ -204,7 +217,7 @@ def main(page: ft.Page):
                 ft.Column([
                     ft.Row([
                         txtSize,
-                        ft.FilledButton('Crear',style=ft.ButtonStyle(color='#6F86FF',bgcolor='white'),on_click=crear)
+                        ft.FilledButton('Crear',style=ft.ButtonStyle(color=azul,bgcolor='transparent'),on_click=crear)
                     ],alignment='center',width=170),
                     ft.Row([
                         toSolve
@@ -212,8 +225,8 @@ def main(page: ft.Page):
                     ft.Row([
                         txtSolucion,
                         ft.Column([
-                            ft.IconButton(ft.icons.DELETE,on_click=borrar,icon_color='#6F86FF'),
-                            ft.IconButton(ft.icons.EXIT_TO_APP,on_click=back,icon_color='#6F86FF')
+                            ft.IconButton(ft.icons.DELETE,on_click=borrar,icon_color=azul),
+                            ft.IconButton(ft.icons.EXIT_TO_APP,on_click=back,icon_color=azul)
                         ],spacing=0)
                     ],alignment='center',width=170)
                 ],alignment='center',height=260)
@@ -258,29 +271,31 @@ def main(page: ft.Page):
                         ],alignment='center'),
                 ft.Row([
                     ft.FilledButton('Convertir'
-                                ,style=ft.ButtonStyle(bgcolor='#6F86FF'),
+                                ,style=ft.ButtonStyle(bgcolor=azul),
                                     width=200,on_click=convert),
-                    ft.IconButton(ft.icons.DELETE,icon_color='#6F86FF',on_click=clear)
+                    ft.IconButton(ft.icons.DELETE,icon_color=azul,on_click=clear)
                     
                         ],alignment='center')
             ],alignment=ft.MainAxisAlignment.CENTER)
 
             ,ft.Row([
-                ft.IconButton(ft.icons.EXIT_TO_APP,on_click=back,icon_color='#6F86FF')
+                ft.IconButton(ft.icons.EXIT_TO_APP,on_click=back,icon_color=azul)
             ],vertical_alignment=ft.MainAxisAlignment.END)
         ],spacing=75,alignment='center')
     )
 
     btns = ft.Row([
-            ft.FilledButton('Gaussiana',style=ft.ButtonStyle(bgcolor='#6F86FF'),on_click=gauss),
-            ft.FilledButton('Convertir',style=ft.ButtonStyle(bgcolor='#6F86FF'),on_click=conv)
+            ft.FilledButton('Gaussiana',style=ft.ButtonStyle(bgcolor=azul),on_click=gauss),
+            ft.FilledButton('Convertir',style=ft.ButtonStyle(bgcolor=azul),on_click=conv)
     ],alignment=ft.MainAxisAlignment.CENTER)
 
     #Main
     _main_ = ft.Container(
         content=ft.Column([
             ft.Text('Evaluaciones',font_family='Poppins',size=20)
-            ,btns
+            ,btns,ft.Row([
+                ft.Switch('Tema',active_color=azul,on_change=temas,value=True)
+            ],alignment='center')
         ],alignment=ft.MainAxisAlignment.CENTER
         ,horizontal_alignment=ft.CrossAxisAlignment.CENTER,height=page.height/2)
     )
