@@ -43,7 +43,7 @@ def main(page: ft.Page):
     #Evento para validar el textField de las conversiones
     def validConvert(e):
         if not(e.control.value == ''):
-            if not(e.control.value[-1] in ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F']):
+            if not(e.control.value[-1] in ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','a','b','c','d','e','f']):
                 e.control.value = e.control.value[0:len(e.control.value) - 1]
                 e.control.update()
 
