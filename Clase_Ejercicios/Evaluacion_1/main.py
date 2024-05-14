@@ -9,6 +9,7 @@ def main(page: ft.Page):
     page.window_width = 450
     page.window_height = 400
     page.padding = 30
+    page.window_title_bar_hidden = True
     
     page.theme_mode = ft.ThemeMode.LIGHT
     azul = '#6F86FF'
