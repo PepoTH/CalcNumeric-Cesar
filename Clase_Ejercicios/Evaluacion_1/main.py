@@ -15,7 +15,7 @@ def main(page: ft.Page):
     azul = '#6F86FF'
 
     def temas(e):
-        if(e.control.value == True):
+        if(e.control.value):
             page.theme_mode = ft.ThemeMode.LIGHT
             contentMat.bgcolor = 'white'
             azul = '#6F86FF'
