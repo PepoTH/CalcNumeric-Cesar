@@ -9,6 +9,18 @@ def main(page: ft.Page):
     
     page.theme_mode = ft.ThemeMode.LIGHT
 
+    def listo(e):
+        if(txtDelete.value != ''):
+            lista.controls.remove(ft.OutlinedBorder(text=txtDelete.value))
+            page.update()
+        pass
+
+    def delete(e):
+        fil.visible = True
+        lista.height = 200
+        page.update()
+        pass
+
     def buscador(e):
         if(len(lista.controls) != 0):
             if(txt.value != ""):
@@ -21,7 +33,7 @@ def main(page: ft.Page):
     titulo = ft.Container(
         ft.Column([
             ft.Row([
-                ft.Text("Facturacion")
+                ft.Text("Citas")
             ],alignment=ft.MainAxisAlignment.CENTER),
             ft.Row([
                 txt
@@ -35,11 +47,11 @@ def main(page: ft.Page):
         inicio.visible = False
         page.update()
     
-        name = ft.TextField(label='Nombre Factura')
-        entrega = ft.TextField(label='Fecha de entrega')
-        destinatario = ft.TextField(label='Destinatario')
-        encargado = ft.TextField(label='Encargado')
-        cantidad = ft.TextField(label='Cantidad')
+        name = ft.TextField(label='Nombre')
+        entrega = ft.TextField(label='Apellido')
+        destinatario = ft.TextField(label='Numero')
+        encargado = ft.TextField(label='Fecha')
+        cantidad = ft.TextField(label='Hora')
     
         def ready(e):
             if name.value!= "":
@@ -53,22 +65,27 @@ def main(page: ft.Page):
                 })
             
                 def detalles(e):
+                    print(e.control)
                     alerta = ft.BottomSheet(
                         ft.Container(
                             ft.Column([
                                 ft.Text(f"Nombre: {fact.getName()}"),
-                                ft.Text(f"Fecha de entrega: {fact.getFechaEntrega()}"),
-                                ft.Text(f"Destinatario: {fact.getDestinatario()}"),
-                                ft.Text(f"Encargado: {fact.getEncargado()}"),
-                                ft.Text(f"Cantidad: {fact.getCantidad()}")
+                                ft.Text(f"Apellido: {fact.getFechaEntrega()}"),
+                                ft.Text(f"Numero: {fact.getDestinatario()}"),
+                                ft.Text(f"Fecha: {fact.getEncargado()}"),
+                                ft.Text(f"Hora: {fact.getCantidad()}")
                             ]), width=300, height=200, padding=30
                         ),
                         open=True
                     )
                     page.overlay.append(alerta)
                     page.update()
-            
-                lista.controls.append(ft.OutlinedButton(fact.getName(), on_click=detalles))
+
+
+                lista.controls.append(
+                        ft.OutlinedButton(fact.getName()
+                                    , on_click=detalles,width=250))
+                                    
                 data.visible = False
                 page.update()
     
@@ -83,15 +100,23 @@ def main(page: ft.Page):
         page.update()
 
     filaADD = ft.Row([
-        ft.FilledButton('+',width=300,on_click=agregar)
+        ft.FilledButton('+',width=250,on_click=agregar),
+        ft.IconButton(ft.icons.DELETE,on_click=delete)
     ],alignment=ft.MainAxisAlignment.CENTER)
 
 
     inicio = ft.Container(ft.Column([
         titulo,lista,filaADD
     ]))
+    txtDelete = ft.TextField(width=250)
+    fil = ft.Row([
+            txtDelete,
+            ft.IconButton(ft.icons.CHECK,listo)
+        ],alignment='center')
+    
+    fil.visible = False
 
-    page.add(inicio)
+    page.add(inicio,fil)
     
     
 ft.app(target=main)
