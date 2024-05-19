@@ -33,31 +33,23 @@ def main(page: ft.Page):
 
     page.add(cv)
 
-    while(True):
-        
-        if not(obj.x >= jugador.x and obj.x <= jugador.x + jugador.width and obj.y >= jugador.y and obj.y <= jugador.y + jugador.height):
-            if(obj.x == page.window_width - 30):
-                mode = False
-            if(obj.x == 10):
-                mode = True
+    mode = True
 
-            if(mode):
+    while(True):
+        if(mode):
+            if(obj.x >= 0 and obj.x <= page.window_width-20):
                 obj.x += 10
             else:
-                obj.x -= 10
-
-            if(obj.y == page.window_height - 40):
-                vertical = False
-            if(obj.y == 10):
-                vertical = True
-
-            if(vertical):
-                obj.y += 10
+                mode = False
+        else:
+            if(obj.x == 0):
+                mode = True
             else:
-                obj.y -= 10
-            t.sleep(0.03)
-
-        
+                obj.x -= 10
+             
+        print(mode)
+        t.sleep(0.03)
+        print(obj.x)
         page.update()
-    
+
 ft.app(target=main)
