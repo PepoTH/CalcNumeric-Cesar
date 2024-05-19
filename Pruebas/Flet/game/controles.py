@@ -61,7 +61,10 @@ def main(page: ft.Page):
                 obj.y -= 10
         
         t.sleep(0.03)
-        print(obj.x)
+
+        if((obj.x >= jugador.x and obj.x <= jugador.x + jugador.width)and(obj.y >= jugador.y and obj.y <= jugador.y + jugador.height)):
+            modeV = not modeV
+            modeH = not modeH
         page.update()
 
 ft.app(target=main)
