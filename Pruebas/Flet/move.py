@@ -3,7 +3,7 @@ import time as t
 
 def main(page: ft.Page):
     page.window_resizable = False
-    page.window_width = 300
+    page.window_width = 500
     page.window_height = 300
 
     page.theme_mode = ft.ThemeMode.LIGHT
@@ -29,7 +29,7 @@ def main(page: ft.Page):
         else:
             obj.x -= 10
 
-        if(obj.y == page.window_height - 30):
+        if(obj.y == page.window_height - 40):
             vertical = False
         if(obj.y == 10):
             vertical = True
