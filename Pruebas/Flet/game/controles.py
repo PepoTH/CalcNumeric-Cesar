@@ -22,7 +22,7 @@ def main(page: ft.Page):
 
         page.update()
 
-    jugador = ft.canvas.Rect(page.window_width/2,page.window_height-70,30,50)
+    jugador = ft.canvas.Rect(0,page.window_height-70,30,50)
     obj = ft.canvas.Circle(10,10,10)
 
     cv = ft.canvas.Canvas([
@@ -34,6 +34,7 @@ def main(page: ft.Page):
     page.add(cv)
 
     while(True):
+        
         if not(obj.x >= jugador.x and obj.x <= jugador.x + jugador.width and obj.y >= jugador.y and obj.y <= jugador.y + jugador.height):
             if(obj.x == page.window_width - 30):
                 mode = False
@@ -55,7 +56,7 @@ def main(page: ft.Page):
             else:
                 obj.y -= 10
             t.sleep(0.03)
-        
+
         
         page.update()
     
