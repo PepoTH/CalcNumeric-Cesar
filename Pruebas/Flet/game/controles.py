@@ -18,11 +18,9 @@ def main(page: ft.Page):
         elif(e.key == 'Arrow Down' and jugador.y <= page.window_height-80):
             jugador.y += 10
 
-        print(e)
-
         page.update()
 
-    jugador = ft.canvas.Rect(0,page.window_height-70,30,50)
+    jugador = ft.canvas.Rect(page.window_width/2,page.window_height-70,30,50)
 
     cv = ft.canvas.Canvas([
         jugador
