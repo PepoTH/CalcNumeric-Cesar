@@ -33,21 +33,33 @@ def main(page: ft.Page):
 
     page.add(cv)
 
-    mode = True
+    modeH = True
+    modeV = True
 
     while(True):
-        if(mode):
+        #Configuracion Horizontal
+        if(modeH):
             if(obj.x >= 0 and obj.x <= page.window_width-20):
                 obj.x += 10
             else:
-                mode = False
+                modeH = False
         else:
             if(obj.x == 0):
-                mode = True
+                modeH = True
             else:
                 obj.x -= 10
-             
-        print(mode)
+
+        if(modeV):
+            if(obj.y >= 0 and obj.y <= page.window_height-35):
+                obj.y += 10
+            else:
+                modeV = False
+        else:
+            if(obj.y == 0):
+                modeV = True
+            else:
+                obj.y -= 10
+        
         t.sleep(0.03)
         print(obj.x)
         page.update()
