@@ -2,7 +2,6 @@ import flet as ft
 import time as t
 
 def main(page: ft.Page):
-    print('Inicio')
     page.window_resizable = False
     page.window_width = 500
     page.window_height = 300
@@ -43,7 +42,14 @@ def main(page: ft.Page):
 
     page.on_keyboard_event = move
 
-    page.add(cv)
+    one = 0
+    two = 0
+
+    fila = ft.Row([
+        ft.Text(f'{one} : {two}')
+    ],alignment='center')
+
+    page.add(cv,fila)
 
     #Configuracion de distancia recorrida
     distancia = 5
@@ -56,6 +62,8 @@ def main(page: ft.Page):
             if(obj.x >= 0 and obj.x <= page.window_width-20):
                 obj.x += distancia
             else:
+                fila.controls[0].value = f'{one} : {two + 1}'
+                two += 1
                 modeH = False
         else:
             if(obj.x == 0):
@@ -83,6 +91,7 @@ def main(page: ft.Page):
         if((obj.x >= jugador2.x and obj.x <= jugador2.x + jugador2.width)and(obj.y >= jugador2.y and obj.y <= jugador2.y + jugador2.height)):
             modeV = not modeV
             modeH = not modeH
+
         page.update()
 
 ft.app(target=main)
