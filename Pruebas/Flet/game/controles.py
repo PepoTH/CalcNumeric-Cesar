@@ -11,22 +11,22 @@ def main(page: ft.Page):
 
     def move(e):
         if(e.key == 'Arrow Left' and jugador.x >= 10):
-                jugador.x -= 20
+                jugador.x -= 30
         elif(e.key == 'Arrow Right' and jugador.x <= page.window_width-40):
-            jugador.x += 20
+            jugador.x += 30
         elif(e.key == 'Arrow Up' and jugador.y >= 10):
-            jugador.y -= 20
+            jugador.y -= 30
         elif(e.key == 'Arrow Down' and jugador.y <= page.window_height-80):
-            jugador.y += 20
+            jugador.y += 30
 
         if(e.key == 'A' and jugador2.x >= 10):
-                jugador2.x -= 20
+                jugador2.x -= 30
         elif(e.key == 'D' and jugador2.x <= page.window_width-40):
-            jugador2.x += 20
+            jugador2.x += 30
         elif(e.key == 'W' and jugador2.y >= 10):
-            jugador2.y -= 20
+            jugador2.y -= 30
         elif(e.key == 'S' and jugador2.y <= page.window_height-80):
-            jugador2.y += 20
+            jugador2.y += 30
 
         page.update()
 
@@ -67,6 +67,8 @@ def main(page: ft.Page):
                 modeH = False
         else:
             if(obj.x == 0):
+                fila.controls[0].value = f'{one + 1} : {two}'
+                one += 1
                 modeH = True
             else:
                 obj.x -= distancia
